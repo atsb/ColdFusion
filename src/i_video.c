@@ -738,7 +738,6 @@ extern boolean setsizeneeded;
 extern void I_InitKeyboard();
 
 int cfg_scalefactor; // haleyjd 05/11/09: scale factor in config
-int cfg_aspectratio; // haleyjd 05/11/09: aspect ratio correction
 
 // haleyjd 05/11/09: true if called from I_ResetScreen
 static boolean changeres = false;
@@ -757,7 +756,6 @@ static void I_InitGraphicsMode(void)
    int flags = 0;
    int scalefactor = cfg_scalefactor;
    int usehires = hires;
-   int useaspect = cfg_aspectratio;
 
    // [FG] SDL2
    int actualheight;
@@ -799,10 +797,7 @@ static void I_InitGraphicsMode(void)
       flags |= SDL_WINDOW_RESIZABLE;
    }
 
-   if(M_CheckParm("-aspect"))
-      useaspect = true;
-
-   actualheight = useaspect ? (6 * v_h / 5) : v_h;
+   actualheight = (6 * v_h / 5);
 
    // [FG] create rendering window
 
@@ -812,8 +807,6 @@ static void I_InitGraphicsMode(void)
                                 // centered window
                                 SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                                 v_w, v_h, flags);
-
-      SDL_SetWindowMinimumSize(screen, v_w, actualheight);
 
       if (screen == NULL)
       {
@@ -886,8 +879,6 @@ static void I_InitGraphicsMode(void)
       I_Error("Error creating renderer for screen window: %s",
               SDL_GetError());
    }
-
-   SDL_RenderSetLogicalSize(renderer, v_w, actualheight);
 
    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
    SDL_RenderClear(renderer);

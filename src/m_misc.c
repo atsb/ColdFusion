@@ -83,7 +83,6 @@ extern int waitAtExit;
 extern int forceFlipPan;
 extern int grabmouse;
 extern int cfg_scalefactor; // haleyjd 05/11/09
-extern int cfg_aspectratio; // haleyjd 05/11/09
 
 extern char *chat_macros[], *wad_files[], *deh_files[];  // killough 10/98
 
@@ -1727,13 +1726,6 @@ default_t defaults[] = {
     (config_t *) &cfg_scalefactor, NULL,
     {1}, {1, 5}, number, ss_none, wad_no,
     "video scaling factor"
-  },
-
-  {
-    "correct_aspect_ratio",
-    (config_t *) &cfg_aspectratio, NULL,
-    {1}, {0, 1}, number, ss_none, wad_no,
-    "1 to perform aspect ratio correction"
   },
 
     // [FG] precache all sound effects

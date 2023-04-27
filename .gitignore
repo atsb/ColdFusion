@@ -1,11 +1,17 @@
 # Prerequisites
 *.d
 
+# msvc crap
+.vs
+
 # Object files
 *.o
 *.ko
 *.obj
 *.elf
+
+# assembler
+*.asm
 
 # Linker output
 *.ilk
@@ -15,6 +21,7 @@
 # Precompiled Headers
 *.gch
 *.pch
+*.res
 
 # Libraries
 *.lib
@@ -41,6 +48,12 @@
 *.su
 *.idb
 *.pdb
+*.tlog
+*.recipe
+*.CppClean.log
+*.log
+*FileListAbsolute.txt
+
 
 # Kernel Module Compile Results
 *.mod*
