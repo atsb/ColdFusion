@@ -1,5 +1,5 @@
 # ColdFusion!
-[![ColdFusion! Icon](https://github.com/atsb/ColdFusion/blob/master/src/coldfusion_icon.png)](https://github.com/atsb/ColdFusion)
+[![ColdFusion! Icon](https://github.com/atsb/ColdFusion/blob/main/src/coldfusion_icon.png)](https://github.com/atsb/ColdFusion)
 
 Original Fusion webpage: http://s91291220.onlinehome.us//doom/fusion.htm
 
