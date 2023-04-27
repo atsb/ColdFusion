@@ -1,0 +1,24 @@
+//Test the MoveForward codepointer
+//Hakx 8/21/1999, Slightly altered by Len Pitre 8/31/2002 (How time flies.)
+
+// Set forward speed
+Frame 806
+Unknown 1 = 6
+
+// Turn ratio
+Frame 807
+Unknown 1 = 45
+
+[CODEPTR]
+frame 806 = MoveForward
+frame 807 = Turn
+
+// The new movement codepointers include:
+// MoveForward  (Moves forward by a displacement of 4 or whatever Unknown 1 
+//               is set to)
+// MoveBackward (Ditto the above, except it's backward ;)
+// Note that these will take forward and backward as from the angle the
+// actor is pointing in.
+// 
+// MoveUp       (Moves up)
+// MoveDown     (Moves Down)

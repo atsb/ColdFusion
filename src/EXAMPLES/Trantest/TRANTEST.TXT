@@ -1,0 +1,185 @@
+These files display usage of the Translucent Table feature of Fusion,
+changing the translucency of the Imp, whilst maintaining the 'normal',
+config file translucency for other MF_TRANSLUCENT things.
+* TRANTEST.TXT -this text file
+* TRANTEST.WAD -the wad file with the Imp's unique translucency map in
+* TRANTEST.DEH -the DEH file that tags the Imp thing to MF_TRANSLUCENT
+
+When generating Tranmap's, be sure to run the tranmap.dat file created by
+the engine through maktrlmp.exe (to delete the file headers etc, and enable
+the engine to read it properly as a lump), before adding it into a wad with
+a wad manipulation tool.
+
+
+/Hakx 8/4/1999
+
+(Len Pitre 8/31/2002: Basically - use the standard Boom procedure for 
+making a transparency map lump, then stuff it into a WAD with the name 
+below. Turn on transparency for that monster and now you have a monster
+who's more or less transparent than everything else is. The code 
+below was ripped right out of Fusion. At least, I think it was.)
+
+// David Wood (Hakx) 8/2/1999
+
+// The Fusion Translucency Table System:
+//
+// Types of thing can now have their own tranmap for transluccency
+// this is accomplished by:
+// * Making a tranmap (use percentage settings in the engine and then
+//   the tranmap.dat file)
+// * Entering the tranmap data lump into a wad file
+// * Naming the lump to the corresponding name for the type of thing
+//
+// Then, when the engine views the translucent things, (NB: They must be
+// mobj-flagged transluccent), it checks to see if the unique tranmap
+// lump for that thing exists and if it does, it uses it. Otherwise a boolean
+// is set to 'on' so that the engine does not attempt searching the loaded
+// wads for the lump again.
+
+// The list of unique tranmap lump names for this usage, corresponding to
+// their thing type is as follows:
+
+TTPLRMAP //   MT_PLAYER
+TTZMBMAP //   MT_POSSESSED
+TTSHTMAP //   MT_SHOTGUY
+TTVLEMAP //   MT_VILE
+TTFREMAP //   MT_FIRE
+TTUNDMAP //   MT_UNDEAD
+TTTCRMAP //   MT_TRACER
+TTSMKMAP //   MT_SMOKE
+TTFATMAP //   MT_FATSO
+TTFTSMAP //   MT_FATSHOT
+TTCHNMAP //   MT_CHAINGUY
+TTTROMAP //   MT_TROOP
+TTSRGMAP //   MT_SERGEANT
+TTSHDMAP //   MT_SHADOWS
+TTHEDMAP //   MT_HEAD
+TTBRSMAP //   MT_BRUISER
+TTBSSMAP //   MT_BRUISERSHOT
+TTKGTMAP //   MT_KNIGHT
+TTSKLMAP //   MT_SKULL
+TTSPDMAP //   MT_SPIDER
+TTBABMAP //   MT_BABY
+TTCYBMAP //   MT_CYBORG
+TTPNEMAP //   MT_PAIN
+TTWLFMAP //   MT_WOLFSS
+TTCKNMAP //   MT_KEEN
+TTBSSMAP //   MT_BOSSBRAIN
+TTBPTMAP //   MT_BOSSSPIT
+TTBSTMAP //   MT_BOSSTARGET
+TTSPSMAP //   MT_SPAWNSHOT
+TTSPFMAP //   MT_SPAWNFIRE
+TTBARMAP //   MT_BARREL
+TTTRSMAP //   MT_TROOPSHOT
+TTHSTMAP //   MT_HEADSHOT
+TTROCMAP //   MT_ROCKET
+TTPLSMAP //   MT_PLASMA
+TTBFGMAP //   MT_BFG
+TTAPLMAP //   MT_ARACHPLAZ
+TTPFFMAP //   MT_PUFF
+TTBLDMAP //   MT_BLOOD
+TTFOGMAP //   MT_TFOG
+TTIFGMAP //   MT_IFOG
+TTTELMAP //   MT_TELEPORTMAN
+TTXBGMAP //   MT_EXTRABFG
+TTMS0MAP //   MT_MISC0
+TTMS1MAP //   MT_MISC1
+TTMS2MAP //   MT_MISC2
+TTMS3MAP //   MT_MISC3
+TTMS4MAP //   MT_MISC4
+TTMS5MAP //   MT_MISC5
+TTMS6MAP //   MT_MISC6
+TTMS7MAP //   MT_MISC7
+TTMS8MAP //   MT_MISC8
+TTMS9MAP //   MT_MISC9,
+TTM10MAP //   MT_MISC10
+TTM11MAP //   MT_MISC11
+TTM12MAP //   MT_MISC12
+TTINVMAP //   MT_INV
+TTM13MAP //   MT_MISC13
+TTINSMAP //   MT_INS
+TTM14MAP //   MT_MISC14
+TTM15MAP //   MT_MISC15
+TTM16MAP //   MT_MISC16
+TTMEGMAP //   MT_MEGA
+TTCLPMAP //   MT_CLIP
+TTM17MAP //   MT_MISC17
+TTM18MAP //   MT_MISC18
+TTM19MAP //   MT_MISC19
+TTM20MAP //   MT_MISC20
+TTM21MAP //   MT_MISC21
+TTM22MAP //   MT_MISC22
+TTM23MAP //   MT_MISC23
+TTM24MAP //   MT_MISC24
+TTM25MAP //   MT_MISC25
+TTCGNMAP //   MT_CHAINGUN
+TTM26MAP //   MT_MISC26
+TTM27MAP //   MT_MISC27
+TTM28MAP //   MT_MISC28
+TTSGNMAP //   MT_SHOTGUN
+TTSSGMAP //   MT_SUPERSHOTGUN
+TTM29MAP //   MT_MISC29
+TTM30MAP //   MT_MISC30
+TTM31MAP //   MT_MISC31
+TTM32MAP //   MT_MISC32
+TTM33MAP //   MT_MISC33
+TTM34MAP //   MT_MISC34
+TTM35MAP //   MT_MISC35
+TTM36MAP //   MT_MISC36
+TTM37MAP //   MT_MISC37
+TTM38MAP //   MT_MISC38
+TTM39MAP //   MT_MISC39
+TTM40MAP //   MT_MISC40
+TTM41MAP //   MT_MISC41
+TTM42MAP //   MT_MISC42
+TTM43MAP //   MT_MISC43
+TTM44MAP //   etc etc thru to misc86
+TTM45MAP
+TTM46MAP
+TTM47MAP
+TTM48MAP
+TTM49MAP
+TTM50MAP
+TTM51MAP
+TTM52MAP
+TTM53MAP
+TTM54MAP
+TTM55MAP
+TTM56MAP
+TTM57MAP
+TTM58MAP
+TTM59MAP
+TTM60MAP
+TTM61MAP
+TTM62MAP
+TTM63MAP
+TTM64MAP
+TTM65MAP
+TTM66MAP
+TTM67MAP
+TTM68MAP
+TTM69MAP
+TTM70MAP
+TTM71MAP
+TTM72MAP
+TTM73MAP
+TTM74MAP
+TTM75MAP
+TTM76MAP
+TTM77MAP
+TTM78MAP
+TTM79MAP
+TTM80MAP
+TTM81MAP
+TTM82MAP
+TTM83MAP
+TTM84MAP
+TTM85MAP
+TTM86MAP
+TTPSHMAP //  MT_PUSH
+TTPLLMAP //  MT_PULL
+TTDOGMAP //  MT_DOGS,
+TTBP1MAP // MT_PLASMA1
+TTBP2MAP // MT_PLASMA2
+TTSCTMAP // MT_SCEPTRE
+TTBIBMAP // MT_BIBLE

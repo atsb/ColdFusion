@@ -1,0 +1,18 @@
+No idea how this one works - all I know is that there's a linedef
+that controls gravity. It's type #301. Likely its exact direction handles
+the exact gravity level. 
+
+Demo WAD: Just jump when standing on the tech-tile area. Or, run towards 
+it and jump. As long as you're moving upward when you enter the sector,
+you'll see it in action.
+
+Another trick that this WAD doesn't demonstrate (and I didn't test - 
+can't either, as Deth is having an adverse reaction to my new video
+card) is that adding 1024* to a linedef's flag value makes it keep 
+the same light level despite floor/ceiling light changes.
+
+*Just like adding 256 makes the line show up on the map from the 
+start.
+
+Len Pitre
+August 31, 2002 AD

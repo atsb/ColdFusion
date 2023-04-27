@@ -1,0 +1,203 @@
+BEX & DEH fun: 
+
+Here's a quick rundown of some of the stuff you can find in Fusion 
+that's outside of the "standard" DEH trickery. The simplest way to 
+access it is to use DeHackEd on a "stanard" section of the code
+then hand-renumber it later to get it where DeHackEd can't put it. 
+Because DeHackEd shorthands things a bit - doesn't include the
+items that match the standard Doom EXE - you might want to heavily
+test things out bit by bit. I made a 90K BEX file for a TC by a 
+mix of DEH renumbering (I have a QBasic program to do the 
+brainwork for me:) and a fair bit of hand-hacking. 
+
+If anyone really wants a peek at some of the stuff I use to make 
+DEHs (like a hacked Doom EXE that has all the frame code at -2
+so it'll never "shorthand" on me), e-mail me at 
+i_am_the_archon@hotmail.com. Use a descriptive subject line: 
+"Hi!"-subject mails often get ignored as spam. The word 
+"Fusion" will get my attention.
+
+
+Anyway, here's the list of things, each prefixed with a -->.
+
+--> More items. While DeHackEd ends at #137, Boom, MBF
+and Fusion all added more. Here's a quick list:
+
+138 - Boom wind pushy thing       #5001
+139 - Boom wind pully thing       #5002
+140 - MBF Dog                     #888
+141 - MBF beta plasma 1           #xxx (Projectiles have no number
+142 - MBF beta plasma 2           #xxx  - can't be placed on map.)
+143 - MBF beta Evil Sceptre       #2016
+144 - MBF beta Unholy Bible       #2017
+145 - Fusion dead Revenant        #10101
+146 - Fusion dead Spectre         #10102
+147 - Fusion dead Mancubus        #10103
+148 - Fusion dead Arch-Vile       #10104
+149 - Fusion dead Arachnotron     #10105
+150 - Fusion dead Hell Knight     #10106
+151 - Fusion dead Chaingunner     #10107
+152 - Fusion dead Cyberdemon      #10108
+153 - Fusion dead Spiderdemon     #10109
+154 - Fusion dead Baron o' Hell   #10110
+155 - Fusion dead SS Nazi         #10111
+156 - Fusion pistol autoshooter   #10131
+157 - Fusion shotgun autoshooter  #10132
+158 - Fusion SSG autoshooter      #10133
+159 - Fusion rocket autoshooter   #10134
+160 - Fusion plasma autoshooter   #10135
+161 - Fusion BFG autoshooter      #10136
+162 - Fusion beta plasma1 autosh. #10137 (Untested.)
+163 - Fusion beta plasma2 autosh. #10138 (Untested.)
+
+
+--> Frames up the wazoo. Doom stops in the 900s. Boom and MBF
+add some more, so to be safe I started my own work on 1301. 
+I'm up to 1771 now and still haven't hit the end.
+
+All these are, as best I can tell, set completely to nulls. 
+
+
+--> Codepointers! Codepointers! Codepointers! 
+
+So, how do you use these pointers? Just like the Boom and MBF 
+codepointers, on which there's already documentation. For instance:
+
+- Start cybbfg.bex - Delete this line! - 
+[CODEPTR]
+Frame 685 = EnemyFireBFG
+Frame 687 = EnemyFireBFG
+Frame 689 = EnemyFireBFG
+- End cybbfg.bex - Delete this line! - 
+
+The Cyberdemon is now a bit tougher. He's packing a BFG!
+
+When I speak of "Unknown 1" or "Misc1", I mean the same thing - the frame 
+references id only used as what seems to be a temp file for weapon pointers.
+(Therefore, they can't be used on weapon-frame codepointers, like the shotgun
+animations. On the other hand, they DO work on weapon effects, like a BFG ball.)
+To use them, add something like this to a DEH file (it'll possibly be 
+redeleted by DeHackEd if ever reopened and saved in there, though!)
+
+- Start cybplas.bex - Delete this line! - 
+Frame 685
+Unknown 1 = 35
+Unknown 2 = 0
+
+Frame 687
+Unknown 1 = 141
+
+Frame 689
+Unknown 1 = 142
+
+[CODEPTR]
+Frame 685 = ProjectileFire
+Frame 687 = ProjectileFire
+Frame 689 = ProjectileFire
+- End cybplas.bex - Delete this line! - 
+
+Now he's a bit weaker - he fires 3 flavors of plasma. (Note: Unknown 2 
+is only used by a few pointers. Not this one. It's assumed to be 0.
+Therefore, its use with frame 685 is pointless - just there to show
+syntax. Also note that ProjectileFire is the general case for EnemyFire
+pointers. In other words, now you could make extra projectiles!
+Added to the randomjump MBF pointer, you could have a monster who fires
+a mix of slow, normal, and fast rockets.)
+
+SHOOTERS: 
+
+ShooterBetaPlasma2     These pointers make something shoot a projectile forward
+ShooterBetaPlasma1     without aiming it. This allows projectiles to have 
+ShooterBFG             secondary blasts, randomly-aiming gun turrets, beams that
+ShooterRocket          need to be jumped over, and other good stuff.
+ShooterPlasma          (Remember the Mauler in Strife? Heh heh heh.:)
+ShooterDoubleShotgun
+ShooterShotgun
+ShooterPistol
+
+
+MOVERS:
+
+MoveDown 	       These four codepointers allow something to move up, down,
+MoveUp    	       forward, and backward. Not meant for walking, since the
+MoveBackward	       motion is a bit too smooth. Works well on projectiles, or
+MoveForward 	       floating monsters. (Might be able to make a simple patrol 
+     	               monster that moves in a circle, along with the MBF Turn
+                       pointer. See also barrel.deh.)
+
+
+PLAYER FIRED WEAPONS:
+
+FireRevenant           Player Weapon codepointer: fires revenant rocket that 
+                       doesn't home in.
+
+FireImp                Player Weapon codepointer: fires imp fireball.
+FireCaco               
+FireArachnotron        (Guess.:)
+FireBaron
+FireMancubus           (Not angled - straight ahead.)
+
+FireBetaPlasma2        Lets player fire one Beta Plasma gun shot. (Red?)
+FireBetaPlasma1        Lets player fire one Beta Plasma gun shot. (Green?)
+
+
+ENEMY-FIRED WEAPONS:
+
+EnemyFireRocket        IIRC basically a copy of the Cyberdemon's attack 
+                       codepointer. Allows enemy to fire a player-ish rocket.
+EnemyFireBetaPlasma2   Allows enemy to fire one of the beta-release plasma
+                       balls.
+EnemyFireBetaPlasma1   See above.
+EnemyFirePlasma        Enemy. Fire. Blue. Plasma.:)
+EnemyFireBFG           It hurts.:)
+
+
+FLAG-TOGGLERS (Most of these are untested!):
+
+MFC_NobloodOff         Makes a monster bleed instead of puffing when shot.
+MFC_NobloodOn          Makes a monster puff instead of bleeding when shot.
+MFC_Noblood            Toggles bleeding and puffing. 
+MFC_TranslucentOff     Makes translucent monster solid. 
+MFC_TranslucentOn      Makes solid monster translucent.
+MFC_Translucent        Toggles transluency.
+MFC_FriendOff          \
+MFC_FriendOn            By now you get the picture. Friendly monster flag.
+MFC_Friend             /
+MFC_TouchyOff          \
+MFC_TouchyOn            Touchy (die when hit by any object) flag.
+MFC_Touchy             /
+MFC_FloatOff           \
+MFC_FloatOn             Floating ability. (Untested!)
+MFC_Float              /
+MFC_ShadowOff          \
+MFC_ShadowOn            Spectre "shadow" effect.
+MFC_Shadow             /
+MFC_BouncesOff         \Turns off bouncing. No BouncesOn, it 
+MFC_Bounces            /seems. Use BouncesOff followed by Bounces.
+
+
+MISC VIOLENCE:
+
+Massacre              Effectively mimics KILLEM cheat, without the onscreen
+                      message. Think D'Sparil's death in Heretic.
+DetonateMisc          Like Detonate, but uses Unknown 1 for the radius damage.
+                      (Detonate is an MBF codepointer - pick your own radius 
+                      damage. Uses the missile damage thing-based setting
+                      for its blast radius, instead of Unknown 1.)
+ProjectileFire        Shoot thing number Unknown 1 like a fireball.
+SplitAttack           For when you want to mimic an Imp or something like that
+                      who can switch between claw and fireball without going 
+                      through its animation frames again. Put this at the end
+                      of the attack animation, on a 0-duration frame, pointing
+                      at the attack frames.
+                      Unknown 1 = close attack, Unknown 2 = far.  
+DistanceDamage        Sort of a scratch attack that works at any range.
+
+
+UNKNOWN: 
+
+Burn                  Uhhhhh.... I don't know.
+SkillJump             Doesn't work, thanks to my crap coding. I forgot a break; 
+                      or something. Need coder help here!
+ProjectileFire2       I forget.:) I think it was beta code that never got used.
+                      It might be an attempt at generalizing Shooter above.

@@ -1,0 +1,7 @@
+// Boomerplasma - fire the plasma gun in a big roomy level like MAP32.
+
+Frame 108
+Unknown 1 = 6
+
+[CODEPTR]
+Frame 108 = MoveBackward
