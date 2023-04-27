@@ -1,5 +1,5 @@
 # ColdFusion!
-[![ColdFusion! Icon](https://github.com/atsb/coldfusion/blob/master/src/coldfusion_icon.png)](https://github.com/atsb/coldfusion)
+[![ColdFusion! Icon](https://github.com/atsb/ColdFusion/blob/main/src/coldfusion_icon.png)](https://github.com/atsb/ColdFusion)
 
 Original Fusion webpage: http://s91291220.onlinehome.us//doom/fusion.htm
 
@@ -34,8 +34,11 @@ Makesfiles and Projects have 'acc' in the name which will build with -DACCESSIBI
 2. Chaingun animated sprite when firing is removed
 
 ============================
+
 ORIGINAL FUSION README BELOW
+
 ============================
+
 // This is the Fusion Release, v1.0 copyright David Gary Wood 1999
 // Assorted bits of documentation and code copyright Len Pitre 2002
 
@@ -53,6 +56,7 @@ the new codepointers, in textdemo.zip
 
 For more info on this release, please visit
 http://archonrealm.tripod.ca/fusion.htm 
+
 ============================
 
 Thanks!
