@@ -34,8 +34,11 @@ Makesfiles and Projects have 'acc' in the name which will build with -DACCESSIBI
 2. Chaingun animated sprite when firing is removed
 
 ============================
+
 ORIGINAL FUSION README BELOW
+
 ============================
+
 // This is the Fusion Release, v1.0 copyright David Gary Wood 1999
 // Assorted bits of documentation and code copyright Len Pitre 2002
 
