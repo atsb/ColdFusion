@@ -60,6 +60,8 @@ int SAMPLECOUNT = 512;
 // [FG] precache all sound effects
 boolean precache_sounds;
 
+int fillscreen;
+
 int snd_card;   // default.cfg variables for digi and midi drives
 int mus_card;   // jff 1/18/98
 

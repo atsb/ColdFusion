@@ -83,7 +83,7 @@ extern int waitAtExit;
 extern int forceFlipPan;
 extern int grabmouse;
 extern int cfg_scalefactor; // haleyjd 05/11/09
-
+extern int cfg_aspectratio; // haleyjd 05/11/09
 extern char *chat_macros[], *wad_files[], *deh_files[];  // killough 10/98
 
 //jff 3/3/98 added min, max, and help string to all entries
@@ -1728,12 +1728,27 @@ default_t defaults[] = {
     "video scaling factor"
   },
 
+  {
+    "correct_aspect_ratio",
+    (config_t*)&cfg_aspectratio, NULL,
+    {1}, {0, 1}, number, ss_none, wad_no,
+    "1 to perform aspect ratio correction"
+  },
+
     // [FG] precache all sound effects
    {
      "precache_sounds",
      (config_t *) &precache_sounds, NULL,
      {1}, {0, 1}, number, ss_none, wad_no,
      "1 to precache all sound effects"
+   },
+
+    // [ATSB] fill the screen instead of a forced 4:3 ratio
+   {
+     "fillscreen",
+     (config_t*)&fillscreen, NULL,
+     {1}, {0, 1}, number, ss_none, wad_no,
+     "1 to fill the screen"
    },
 
   {NULL}         // last entry
